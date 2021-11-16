@@ -1,2 +1,12 @@
 GET http://127.0.0.1:8000/api/secret/asdfgh
 Content-Type: application/json
+
+###
+POST http://127.0.0.1:8000/api/secret
+Content-Type: application/json
+
+{
+    "secretText": "Test posting secret test",
+    "expireAfterViews": 3,
+    "expireAfter": 10
+}
