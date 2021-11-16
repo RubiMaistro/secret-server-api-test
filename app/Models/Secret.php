@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Secret extends Model
 {
+    protected $table = 'secret';
+    protected $primaryKey = 'hash';
     protected $fillable = [
         'hash', 'secretText', 'createdAt', 'expiresAt', 'remainingViews'
     ];
