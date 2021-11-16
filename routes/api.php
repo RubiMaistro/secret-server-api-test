@@ -18,7 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/secret', [App\Http\Controllers\SecretController::class, 'index']);
-Route::get('/secret/{hash}', [App\Http\Controllers\SecretController::class, 'show']);
+Route::post('/secret', [App\Http\Controllers\SecretController::class, 'addSecret']);
+Route::get('/secret/{hash}', [App\Http\Controllers\SecretController::class, 'getSecretByHash']);
 
 

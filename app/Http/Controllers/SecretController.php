@@ -9,7 +9,7 @@ use DateTime;
 
 class SecretController extends Controller
 {
-    public function index(Request $request){
+    public function addSecret(Request $request){
         try{
             $secret = new Secret();
 
@@ -23,21 +23,21 @@ class SecretController extends Controller
             return response()->json(['description' => 'Successful operation'], 200);
 
         } catch(Exception $e) {
-            return response()->json([
-                'description' => 'Invalid input',
-                'error' => $e,
-            ], 200);
+            return response()->json(['description' => 'Invalid input',], 405);
         }
     }
 
-    public function show($hash){
+    public function getSecretByHash($hash){
         $secret = Secret::find($hash);
 
         if(is_null($secret)) {
             return response()->json(['description' => 'Secret not found'], 404);
         } 
 
-        return response()->json(Secret::find($hash), 200);
+        return response()->json([
+            'description' => 'Successful operation',
+            'secret' => $secret->secretText
+        ], 200);
     }
 
     private function getExpires($minutes) {
