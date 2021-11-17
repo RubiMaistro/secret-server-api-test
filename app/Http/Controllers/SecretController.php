@@ -23,13 +23,13 @@ class SecretController extends Controller
             // Check expired
             $this->expireAfterTriggers();
 
-            return response()->json(['description' => 'Successful operation'], 200);
+            return response()->json([
+                'description' => 'Successful operation',
+                'hash' => $secret->hash
+            ], 200);
 
         } catch(Exception $e) {
-            return response()->json([
-                'description' => 'Invalid input',
-                'error' => $e
-        ], 405);
+            return response()->json(['description' => 'Invalid input'], 405);
         }
     }
 
