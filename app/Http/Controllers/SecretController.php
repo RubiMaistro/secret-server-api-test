@@ -20,10 +20,16 @@ class SecretController extends Controller
             $secret->remainingViews = $request->get('expireAfterViews');
             $secret->save();
 
+            // Check expired
+            $this->expireAfterTriggers();
+
             return response()->json(['description' => 'Successful operation'], 200);
 
         } catch(Exception $e) {
-            return response()->json(['description' => 'Invalid input',], 405);
+            return response()->json([
+                'description' => 'Invalid input',
+                'error' => $e
+        ], 405);
         }
     }
 
@@ -34,10 +40,27 @@ class SecretController extends Controller
             return response()->json(['description' => 'Secret not found'], 404);
         } 
 
+        // Decrease value
+        $this->decreasedViews($hash);
+
+        // Check expired
+        $this->expireAfterTriggers();
+
         return response()->json([
             'description' => 'Successful operation',
             'secret' => $secret->secretText
         ], 200);
+    }
+
+    private function expireAftertriggers() {
+        Secret::where('expiresAt', '<', date("Y-m-d H:i:s"))->delete();
+        Secret::where('remainingViews', 0)->delete();
+    }
+
+    private function decreasedViews($hash) {
+        $secret = Secret::find($hash);
+        Secret::where('hash', $hash)
+            ->update(['remainingViews' => $secret->remainingViews-1]);
     }
 
     private function getExpires($minutes) {

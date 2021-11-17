@@ -1,8 +1,10 @@
-GET http://127.0.0.1:8000/api/secret/834y5w
-Content-Type: application/json
+GET http://127.0.0.1:8000/api/secret/834y5w HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Accept: application/xml
+
 
 ###
-POST http://127.0.0.1:8000/api/secret
+POST http://127.0.0.1:8000/api/secret HTTP/1.1
 Content-Type: application/json
 
 {
