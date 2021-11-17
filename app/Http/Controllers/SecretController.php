@@ -34,18 +34,18 @@ class SecretController extends Controller
     }
 
     public function getSecretByHash($hash){
+        // Check expired
+        $this->expireAfterTriggers();
+
         $secret = Secret::find($hash);
 
         if(is_null($secret)) {
             return response()->json(['description' => 'Secret not found'], 404);
-        } 
-
-        // Decrease value
-        $this->decreasedViews($hash);
-
-        // Check expired
-        $this->expireAfterTriggers();
-
+        } else {
+            // Decrease value
+            $this->decreasedViews($hash);
+        }
+        
         return response()->json([
             'description' => 'Successful operation',
             'secret' => $secret->secretText
