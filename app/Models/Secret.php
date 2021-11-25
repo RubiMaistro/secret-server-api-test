@@ -48,10 +48,8 @@ class Secret extends Model
      * @var string[]
      */
     protected $fillable = [
-        'hash',
         'secretText',
-        'createdAt',
-        'expiresAt',
-        'remainingViews',
+        'expireAfterViews',
+        'expireAfter'
     ];
 }

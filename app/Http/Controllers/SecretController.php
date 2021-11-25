@@ -24,8 +24,11 @@ class SecretController extends Controller
             $this->expireAfterTriggers();
 
             return response()->json([
-                'description' => 'Successful operation',
-                'hash' => $secret->hash
+                'hash' => $secret->hash,
+                'secretText' => $secret->secretText,
+                'createdAt' => $secret->createdAt,
+                'expiresAt' => $secret->expiresAt,
+                'remainingViews' => $secret->remainingViews
             ], 200);
 
         } catch(Exception $e) {
@@ -47,8 +50,11 @@ class SecretController extends Controller
         }
         
         return response()->json([
-            'description' => 'Successful operation',
-            'secret' => $secret->secretText
+            'hash' => $secret->hash,
+            'secretText' => $secret->secretText,
+            'createdAt' => $secret->createdAt,
+            'expiresAt' => $secret->expiresAt,
+            'remainingViews' => $secret->remainingViews
         ], 200);
     }
 
@@ -68,7 +74,9 @@ class SecretController extends Controller
         $dateTime->format("Y-m-d H:i:s");
         $dateTime->modify("+{$minutes} minutes");
 
-        return $dateTime;
+
+
+        return date_format($dateTime,"Y-m-d H:i:s");
     }
 
     private function generateRandomHash($length = 6) {
