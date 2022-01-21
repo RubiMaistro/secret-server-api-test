@@ -4,11 +4,11 @@ Secret Server API
 
 Deploy
 -------
-- http://online-files.herokuapp.com/
+- https://mysecret-serverapi.herokuapp.com/
 
 Using
 -------
 - Post
-    - https://testherokuapideploy.herokuapp.com/api/secret
+    - https://mysecret-serverapi.herokuapp.com/api/secret
 - Get
-    - https://testherokuapideploy.herokuapp.com/api/secret/{hash}
+    - https://mysecret-serverapi.herokuapp.com/api/secret/{hash}
