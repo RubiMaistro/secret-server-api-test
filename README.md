@@ -4,7 +4,7 @@ Secret Server API
 
 Deploy
 -------
-- https://testherokuapideploy.herokuapp.com/
+- http://online-files.herokuapp.com/
 
 Using
 -------
